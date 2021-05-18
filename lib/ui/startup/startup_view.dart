@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
-import 'package:votal_app/ui/views/startup/startup_viewmodel.dart';
+import 'package:votal_app/ui/startup/startup_viewmodel.dart';
 
 class StartUpView extends StatelessWidget {
   const StartUpView({Key? key}) : super(key: key);

@@ -41,6 +41,9 @@ dependencies:
   get_it: ^6.0.0
   firebase_core: ^1.1.1
   firebase_auth: ^1.1.4
+  stacked_firebase_auth: ^0.2.5
+  cloud_firestore: ^2.1.0
+  freezed: ^0.14.2
 
 dev_dependencies:
   flutter_test:
@@ -52,11 +55,8 @@ dev_dependencies:
   # data models
   json_serializable: ^4.1.0
 
-  places_service: ^0.1.0
-
   # Testing
   mockito: null
 
 flutter:
   uses-material-design: true
-

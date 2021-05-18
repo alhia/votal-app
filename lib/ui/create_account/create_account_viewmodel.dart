@@ -3,21 +3,20 @@ import 'package:votal_app/app/app.locator.dart';
 import 'package:votal_app/app/app.router.dart';
 import 'package:votal_app/ui/base/authentication_viewmodel.dart';
 
-import 'login_view.form.dart';
+import 'create_account_view.form.dart';
 
-class LoginViewModel extends AuthenticationViewModel {
-  final FirebaseAuthenticationService? _firebaseAuthenticationService =
+class CreateAccountViewModel extends AuthenticationViewModel {
+  final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
-  LoginViewModel() : super(successRoute: Routes.homeView);
+  CreateAccountViewModel() : super(successRoute: Routes.homeView);
 
   @override
   Future<FirebaseAuthenticationResult> runAuthentication() =>
-      _firebaseAuthenticationService!.loginWithEmail(
+      _firebaseAuthenticationService.createAccountWithEmail(
         email: emailValue!,
         password: passwordValue!,
       );
 
-  void navigateToCreateAccount() =>
-      navigationService.navigateTo(Routes.createAccountView);
+  void navigateBack() => navigationService.back();
 }

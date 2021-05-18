@@ -3,31 +3,36 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:votal_app/ui/dumb_widgets/authentication_layout.dart';
 
-import 'login_view.form.dart';
-import 'login_viewmodel.dart';
+import 'create_account_view.form.dart';
+import 'create_account_viewmodel.dart';
 
 @FormView(fields: [
+  FormTextField(name: 'fullName'),
   FormTextField(name: 'email'),
   FormTextField(name: 'password'),
 ])
-class LoginView extends StatelessWidget with $LoginView {
-  LoginView({Key? key}) : super(key: key);
+class CreateAccountView extends StatelessWidget with $CreateAccountView {
+  CreateAccountView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<LoginViewModel>.reactive(
+    return ViewModelBuilder<CreateAccountViewModel>.reactive(
       onModelReady: (model) => listenToFormUpdated(model),
       builder: (context, model, child) => Scaffold(
           body: AuthenticationLayout(
         busy: model.isBusy,
         onMainButtonTapped: model.saveData,
-        onCreateAccountTapped: model.navigateToCreateAccount,
+        onBackPressed: model.navigateBack,
         validationMessage: model.validationMessage,
-        title: 'Welcome',
-        subtitle: 'Enter your email address to sign in. Enjoy your food',
-        mainButtonTitle: 'SIGN IN',
+        title: 'Create Account',
+        subtitle: 'Enter your name, email and password for sign up.',
+        mainButtonTitle: 'SIGN UP',
         form: Column(
           children: [
+            TextField(
+              decoration: InputDecoration(labelText: 'Full Name'),
+              controller: fullNameController,
+            ),
             TextField(
               decoration: InputDecoration(labelText: 'Email'),
               controller: emailController,
@@ -38,11 +43,9 @@ class LoginView extends StatelessWidget with $LoginView {
             ),
           ],
         ),
-        onForgotPassword: () {},
-        onSignInWithGoogle: model.useGoogleAuthentication,
-        onSignInWithApple: model.useFacebookAuthentication,
+        showTermsText: true,
       )),
-      viewModelBuilder: () => LoginViewModel(),
+      viewModelBuilder: () => CreateAccountViewModel(),
     );
   }
 }
