@@ -2,13 +2,14 @@
 // in votal_app/test/helpers/test_helpers.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i6;
+import 'dart:async' as _i4;
 
-import 'package:flutter/src/widgets/framework.dart' as _i4;
-import 'package:flutter/src/widgets/navigator.dart' as _i5;
+import 'package:flutter/src/widgets/framework.dart' as _i6;
+import 'package:flutter/src/widgets/navigator.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:stacked_services/src/navigation_service.dart' as _i3;
-import 'package:votal_app/services/user_service.dart' as _i2;
+import 'package:stacked_services/src/navigation_service.dart' as _i5;
+import 'package:votal_app/models/user/user.dart' as _i2;
+import 'package:votal_app/services/user_service.dart' as _i3;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
@@ -17,20 +18,37 @@ import 'package:votal_app/services/user_service.dart' as _i2;
 
 // ignore_for_file: avoid_redundant_argument_values
 
+class _FakeUser extends _i1.Fake implements _i2.User {}
+
 /// A class which mocks [UserService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserService extends _i1.Mock implements _i2.UserService {
+class MockUserService extends _i1.Mock implements _i3.UserService {
   @override
   bool get hasLoggedInUser => (super
           .noSuchMethod(Invocation.getter(#hasLoggedInUser), returnValue: false)
       as bool);
+  @override
+  _i2.User get currentUser =>
+      (super.noSuchMethod(Invocation.getter(#currentUser),
+          returnValue: _FakeUser()) as _i2.User);
+  @override
+  _i4.Future<void> syncUserAccount() =>
+      (super.noSuchMethod(Invocation.method(#syncUserAccount, []),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> syncOrCreateUserAccount({_i2.User? user}) =>
+      (super.noSuchMethod(
+          Invocation.method(#syncOrCreateUserAccount, [], {#user: user}),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
 }
 
 /// A class which mocks [NavigationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
+class MockNavigationService extends _i1.Mock implements _i5.NavigationService {
   @override
   String get previousRoute =>
       (super.noSuchMethod(Invocation.getter(#previousRoute), returnValue: '')
@@ -40,9 +58,9 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
       (super.noSuchMethod(Invocation.getter(#currentRoute), returnValue: '')
           as String);
   @override
-  _i4.GlobalKey<_i5.NavigatorState>? nestedNavigationKey(int? index) =>
+  _i6.GlobalKey<_i7.NavigatorState>? nestedNavigationKey(int? index) =>
       (super.noSuchMethod(Invocation.method(#nestedNavigationKey, [index]))
-          as _i4.GlobalKey<_i5.NavigatorState>?);
+          as _i6.GlobalKey<_i7.NavigatorState>?);
   @override
   void config(
           {bool? enableLog,
@@ -62,7 +80,7 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
           }),
           returnValueForMissingStub: null);
   @override
-  _i6.Future<dynamic>? navigateWithTransition(_i4.Widget? page,
+  _i4.Future<dynamic>? navigateWithTransition(_i6.Widget? page,
           {bool? opaque,
           String? transition = r'',
           Duration? duration,
@@ -76,9 +94,9 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
         #duration: duration,
         #popGesture: popGesture,
         #id: id
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
   @override
-  _i6.Future<dynamic>? replaceWithTransition(_i4.Widget? page,
+  _i4.Future<dynamic>? replaceWithTransition(_i6.Widget? page,
           {bool? opaque,
           String? transition = r'',
           Duration? duration,
@@ -92,13 +110,13 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
         #duration: duration,
         #popGesture: popGesture,
         #id: id
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
   @override
   bool back({dynamic result, int? id}) => (super.noSuchMethod(
       Invocation.method(#back, [], {#result: result, #id: id}),
       returnValue: false) as bool);
   @override
-  void popUntil(_i5.RoutePredicate? predicate) =>
+  void popUntil(_i7.RoutePredicate? predicate) =>
       super.noSuchMethod(Invocation.method(#popUntil, [predicate]),
           returnValueForMissingStub: null);
   @override
@@ -106,7 +124,7 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
       super.noSuchMethod(Invocation.method(#popRepeated, [popTimes]),
           returnValueForMissingStub: null);
   @override
-  _i6.Future<dynamic>? navigateTo(String? routeName,
+  _i4.Future<dynamic>? navigateTo(String? routeName,
           {dynamic arguments,
           int? id,
           bool? preventDuplicates = true,
@@ -118,9 +136,9 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
         #id: id,
         #preventDuplicates: preventDuplicates,
         #parameters: parameters
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
   @override
-  _i6.Future<dynamic>? navigateToView(_i4.Widget? view,
+  _i4.Future<dynamic>? navigateToView(_i6.Widget? view,
           {dynamic arguments, int? id, bool? preventDuplicates = true}) =>
       (super.noSuchMethod(Invocation.method(#navigateToView, [
         view
@@ -128,9 +146,9 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
         #arguments: arguments,
         #id: id,
         #preventDuplicates: preventDuplicates
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
   @override
-  _i6.Future<dynamic>? replaceWith(String? routeName,
+  _i4.Future<dynamic>? replaceWith(String? routeName,
           {dynamic arguments,
           int? id,
           bool? preventDuplicates = true,
@@ -142,9 +160,9 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
         #id: id,
         #preventDuplicates: preventDuplicates,
         #parameters: parameters
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
   @override
-  _i6.Future<dynamic>? clearStackAndShow(String? routeName,
+  _i4.Future<dynamic>? clearStackAndShow(String? routeName,
           {dynamic arguments, int? id, Map<String, String>? parameters}) =>
       (super.noSuchMethod(Invocation.method(#clearStackAndShow, [
         routeName
@@ -152,9 +170,9 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
         #arguments: arguments,
         #id: id,
         #parameters: parameters
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
   @override
-  _i6.Future<dynamic>? clearTillFirstAndShow(String? routeName,
+  _i4.Future<dynamic>? clearTillFirstAndShow(String? routeName,
           {dynamic arguments,
           int? id,
           bool? preventDuplicates = true,
@@ -166,20 +184,20 @@ class MockNavigationService extends _i1.Mock implements _i3.NavigationService {
         #id: id,
         #preventDuplicates: preventDuplicates,
         #parameters: parameters
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
   @override
-  _i6.Future<dynamic>? clearTillFirstAndShowView(_i4.Widget? view,
+  _i4.Future<dynamic>? clearTillFirstAndShowView(_i6.Widget? view,
           {dynamic arguments, int? id}) =>
       (super.noSuchMethod(Invocation.method(#clearTillFirstAndShowView, [view],
-          {#arguments: arguments, #id: id})) as _i6.Future<dynamic>?);
+          {#arguments: arguments, #id: id})) as _i4.Future<dynamic>?);
   @override
-  _i6.Future<dynamic>? pushNamedAndRemoveUntil(String? routeName,
-          {_i5.RoutePredicate? predicate, dynamic arguments, int? id}) =>
+  _i4.Future<dynamic>? pushNamedAndRemoveUntil(String? routeName,
+          {_i7.RoutePredicate? predicate, dynamic arguments, int? id}) =>
       (super.noSuchMethod(Invocation.method(#pushNamedAndRemoveUntil, [
         routeName
       ], {
         #predicate: predicate,
         #arguments: arguments,
         #id: id
-      })) as _i6.Future<dynamic>?);
+      })) as _i4.Future<dynamic>?);
 }

@@ -2,6 +2,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:votal_app/app/app.locator.dart';
+import 'package:votal_app/models/user/user.dart';
 import 'package:votal_app/services/user_service.dart';
 import 'test_helpers.mocks.dart';
 
@@ -11,10 +12,12 @@ import 'test_helpers.mocks.dart';
 ])
 UserService getAndRegisterUserService({
   bool hasLoggedInUser = false,
+  User? currentUser,
 }) {
   _removeRegistrationIfExists<UserService>();
   final service = MockUserService();
   when(service.hasLoggedInUser).thenReturn(hasLoggedInUser);
+  when(service.currentUser).thenReturn(currentUser ?? User(id: 'default_user'));
   locator.registerSingleton<UserService>(service);
   return service;
 }
