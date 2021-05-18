@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:votal_app/app/app.locator.dart';
 
-void main() {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   setupLocator(environment: Environment.dev);
   runApp(MyApp());
 }

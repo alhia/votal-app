@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216511775606",
+    "project_id": "votal-8dff1",
+    "storage_bucket": "votal-8dff1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216511775606:android:985dde8b1844f4afb43057",
+        "android_client_info": {
+          "package_name": "com.alex.votal_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216511775606-0b10c6u6jc5lb3j9ae2tcjudo8qm1nlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQf4aEaJoJnhovQqvll0AsVRlZQ97Haf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216511775606-0b10c6u6jc5lb3j9ae2tcjudo8qm1nlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
