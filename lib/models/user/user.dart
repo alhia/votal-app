@@ -11,6 +11,7 @@ abstract class User implements _$User {
   factory User({
     required String id,
     String? email,
+    String? name,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

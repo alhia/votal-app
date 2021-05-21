@@ -6,6 +6,7 @@ import 'package:votal_app/app/app.logger.dart';
 import 'package:votal_app/exeptions/exeptions.dart';
 import 'package:votal_app/models/user/user.dart';
 import 'package:votal_app/services/user_service.dart';
+import 'package:votal_app/ui/create_account/create_account_view.form.dart';
 
 abstract class AuthenticationViewModel extends FormViewModel {
   final log = getLogger('AuthenticationViewModel');
@@ -65,6 +66,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
         user: User(
           id: user.uid,
           email: user.email,
+          name: formValueMap[FullNameValueKey],
         ),
       );
 

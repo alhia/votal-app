@@ -6,7 +6,6 @@ import 'package:votal_app/models/user/user.dart';
 class FirestoreApi {
   final log = getLogger('FirestoreApi');
 
-
   final CollectionReference<User> usersCollection = FirebaseFirestore.instance
       .collection('users')
       .withConverter<User>(

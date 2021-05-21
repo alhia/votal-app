@@ -54,12 +54,17 @@ class AuthenticationLayout extends StatelessWidget {
               ),
               onPressed: onBackPressed,
             ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.deepPurpleAccent[200],
+          Center(
+            child: Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.deepPurpleAccent[200],
+              ),
+              child: Icon(Icons.music_note, size: 32),
             ),
-            child: Icon(Icons.music_note, size: 32),
           ),
+          verticalSpaceSmall,
           Center(
             child: Text(
               title!,

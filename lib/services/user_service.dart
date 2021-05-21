@@ -14,12 +14,11 @@ class UserService {
 
   User? _currentUser;
 
-  User get currentUser => _currentUser!;
+  User? get currentUser => _currentUser;
 
   Future<void> syncUserAccount() async {
     final firebaseUserId =
         _firebaseAuthenticationService.firebaseAuth.currentUser!.uid;
-
     log.v('Sync user $firebaseUserId');
 
     final userAccount = await _firestoreApi.getUser(userId: firebaseUserId);

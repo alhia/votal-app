@@ -11,8 +11,10 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) =>
           SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {}),
-      builder: (context, model, child) => Container(
-        child: Text('home'),
+      builder: (context, model, child) => Scaffold(
+        body: Container(
+          child: Center(child: Text(model.currentUser.name!)),
+        ),
       ),
       viewModelBuilder: () => HomeViewModel(),
     );
