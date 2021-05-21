@@ -9,7 +9,7 @@ import 'create_account_viewmodel.dart';
 @FormView(fields: [
   FormTextField(name: 'fullName'),
   FormTextField(name: 'email'),
-  FormTextField(name: 'password'),
+  FormTextField(name: 'password', isPassword: true),
 ])
 class CreateAccountView extends StatelessWidget with $CreateAccountView {
   CreateAccountView({Key? key}) : super(key: key);

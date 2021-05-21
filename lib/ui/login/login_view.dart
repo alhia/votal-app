@@ -8,7 +8,7 @@ import 'login_viewmodel.dart';
 
 @FormView(fields: [
   FormTextField(name: 'email'),
-  FormTextField(name: 'password'),
+  FormTextField(name: 'password', isPassword: true),
 ])
 class LoginView extends StatelessWidget with $LoginView {
   LoginView({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class LoginView extends StatelessWidget with $LoginView {
         onCreateAccountTapped: model.navigateToCreateAccount,
         validationMessage: model.validationMessage,
         title: 'Welcome',
-        subtitle: 'Enter your email address to sign in. Enjoy your food',
+        subtitle: 'Please sign up to your account to continue.',
         mainButtonTitle: 'SIGN IN',
         form: Column(
           children: [
@@ -35,6 +35,7 @@ class LoginView extends StatelessWidget with $LoginView {
             TextField(
               decoration: InputDecoration(labelText: 'Password'),
               controller: passwordController,
+              
             ),
           ],
         ),
