@@ -38,6 +38,7 @@ class AuthenticationLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: ListView(
@@ -108,7 +109,7 @@ class AuthenticationLayout extends StatelessWidget {
               height: 50,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                color: theme.primaryColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: busy

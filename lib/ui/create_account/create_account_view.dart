@@ -16,36 +16,38 @@ class CreateAccountView extends StatelessWidget with $CreateAccountView {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ViewModelBuilder<CreateAccountViewModel>.reactive(
       onModelReady: (model) => listenToFormUpdated(model),
       builder: (context, model, child) => Scaffold(
+          backgroundColor: theme.scaffoldBackgroundColor,
           body: AuthenticationLayout(
-        busy: model.isBusy,
-        onMainButtonTapped: model.saveData,
-        onBackPressed: model.navigateBack,
-        validationMessage: model.validationMessage,
-        title: 'Create Account',
-        subtitle: 'Enter your name, email and password for sign up.',
-        mainButtonTitle: 'SIGN UP',
-        form: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Full Name'),
-              controller: fullNameController,
+            busy: model.isBusy,
+            onMainButtonTapped: model.saveData,
+            onBackPressed: model.navigateBack,
+            validationMessage: model.validationMessage,
+            title: 'Create Account',
+            subtitle: 'Enter your name, email and password for sign up.',
+            mainButtonTitle: 'SIGN UP',
+            form: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(labelText: 'Full Name'),
+                  controller: fullNameController,
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Email'),
+                  controller: emailController,
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                  controller: passwordController,
+                ),
+              ],
             ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Email'),
-              controller: emailController,
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-              controller: passwordController,
-            ),
-          ],
-        ),
-        showTermsText: true,
-      )),
+            showTermsText: true,
+          )),
       viewModelBuilder: () => CreateAccountViewModel(),
     );
   }
