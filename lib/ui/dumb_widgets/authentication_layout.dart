@@ -54,13 +54,20 @@ class AuthenticationLayout extends StatelessWidget {
               ),
               onPressed: onBackPressed,
             ),
-          Text(
-            title!,
-            style: TextStyle(fontSize: 34),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.deepPurpleAccent[200],
+            ),
+            child: Icon(Icons.music_note, size: 32),
+          ),
+          Center(
+            child: Text(
+              title!,
+              style: TextStyle(fontSize: 34),
+            ),
           ),
           verticalSpaceSmall,
-          Align(
-            alignment: Alignment.centerLeft,
+          Center(
             child: SizedBox(
               width: screenWidthPercentage(context, percentage: 0.7),
               child: Text(
@@ -96,6 +103,7 @@ class AuthenticationLayout extends StatelessWidget {
               height: 50,
               alignment: Alignment.center,
               decoration: BoxDecoration(
+                color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: busy
@@ -140,10 +148,10 @@ class AuthenticationLayout extends StatelessWidget {
               )),
           verticalSpaceRegular,
           if (Platform.isIOS)
-            AppleAuthButton(
+            FacebookAuthButton(
               onPressed: onSignInWithApple ?? () {},
               // darkMode: true,
-              text: 'CONTINUE WITH APPLE',
+              text: 'CONTINUE WITH FACEBOOK',
               style: AuthButtonStyle(
                 iconSize: 24,
                 height: 50,
