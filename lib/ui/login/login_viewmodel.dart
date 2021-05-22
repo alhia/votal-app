@@ -1,6 +1,6 @@
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:votal_app/app/app.gr.dart';
-import 'package:votal_app/app/app.locator.dart';
+import 'package:votal_app/app/locator.dart';
 import 'package:votal_app/ui/base/authentication_viewmodel.dart';
 
 import 'login_view.form.dart';

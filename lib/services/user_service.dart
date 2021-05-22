@@ -1,7 +1,7 @@
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:votal_app/api/firestore_api.dart';
-import 'package:votal_app/app/app.locator.dart';
 import 'package:votal_app/app/app.logger.dart';
+import 'package:votal_app/app/locator.dart';
 import 'package:votal_app/models/user/user.dart';
 
 class UserService {

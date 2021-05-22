@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:votal_app/app/app.gr.dart';
+import 'package:votal_app/app/locator.dart';
 import 'package:votal_app/services/user_service.dart';
 
-import 'app.locator.dart';
 
 // mock auth state
 

@@ -8,10 +8,11 @@ import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
 import '../ui/create_account/create_account_view.dart' as _i6;
-import '../ui/feed/feed_view.dart' as _i8;
+import '../ui/create_post/create_post_view.dart' as _i8;
+import '../ui/feed/feed_view.dart' as _i9;
 import '../ui/home/home_view.dart' as _i7;
 import '../ui/login/login_view.dart' as _i5;
-import '../ui/profile/profile_view.dart' as _i9;
+import '../ui/profile/profile_view.dart' as _i10;
 import '../ui/startup/startup_view.dart' as _i4;
 import 'auth_guard.dart' as _i3;
 
@@ -44,20 +45,31 @@ class AppRouter extends _i1.RootStackRouter {
               orElse: () => const CreateAccountRouteArgs());
           return _i6.CreateAccountView(key: args.key);
         }),
+    HomeWrapper.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i1.EmptyRouterPage();
+        }),
     HomeRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i7.HomeView();
         }),
+    CreatePostModal.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i8.CreatePostView();
+        },
+        fullscreenDialog: true),
     FeedTab.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i8.FeedView();
+          return _i9.FeedView();
         }),
     ProfileTab.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i9.ProfileView();
+          return const _i10.ProfileView();
         })
   };
 
@@ -66,11 +78,14 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(StartUpRoute.name, path: '/'),
         _i1.RouteConfig(LoginRoute.name, path: '/login-view'),
         _i1.RouteConfig(CreateAccountRoute.name, path: '/create-account-view'),
-        _i1.RouteConfig(HomeRoute.name, path: '/home-view', guards: [
-          authGuard
-        ], children: [
-          _i1.RouteConfig(FeedTab.name, path: 'feed-view'),
-          _i1.RouteConfig(ProfileTab.name, path: 'profile-view')
+        _i1.RouteConfig(HomeWrapper.name, path: 'home', children: [
+          _i1.RouteConfig(HomeRoute.name, path: '', guards: [
+            authGuard
+          ], children: [
+            _i1.RouteConfig(FeedTab.name, path: 'feed-view'),
+            _i1.RouteConfig(ProfileTab.name, path: 'profile-view')
+          ]),
+          _i1.RouteConfig(CreatePostModal.name, path: 'create-post-view')
         ])
       ];
 }
@@ -109,11 +124,24 @@ class CreateAccountRouteArgs {
   final _i2.Key? key;
 }
 
+class HomeWrapper extends _i1.PageRouteInfo {
+  const HomeWrapper({List<_i1.PageRouteInfo>? children})
+      : super(name, path: 'home', initialChildren: children);
+
+  static const String name = 'HomeWrapper';
+}
+
 class HomeRoute extends _i1.PageRouteInfo {
   const HomeRoute({List<_i1.PageRouteInfo>? children})
-      : super(name, path: '/home-view', initialChildren: children);
+      : super(name, path: '', initialChildren: children);
 
   static const String name = 'HomeRoute';
+}
+
+class CreatePostModal extends _i1.PageRouteInfo {
+  const CreatePostModal() : super(name, path: 'create-post-view');
+
+  static const String name = 'CreatePostModal';
 }
 
 class FeedTab extends _i1.PageRouteInfo {

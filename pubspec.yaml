@@ -25,6 +25,8 @@ dependencies:
   auto_route: ^2.2.0
   cloud_firestore: ^2.1.0
   cupertino_icons: ^1.0.2
+  file: ^6.1.1
+  file_utils: ^1.0.0
   firebase_auth: ^1.1.4
   firebase_core: ^1.1.1
   flutter_dotenv: ^4.0.0-nullsafety.1
@@ -33,9 +35,13 @@ dependencies:
   get_it: ^6.0.0
   json_annotation: ^4.0.1
   logger: null
+  path: ^1.8.0
+  path_provider: ^2.0.1
   stacked: null
   stacked_firebase_auth: ^0.2.5
   stacked_services: null
+  file_picker: ^3.0.1
+  photo_manager: ^1.2.0
 
 dev_dependencies:
   flutter_test:

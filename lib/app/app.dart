@@ -1,7 +1,9 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:votal_app/app/auth_guard.dart';
 import 'package:votal_app/ui/create_account/create_account_view.dart';
+import 'package:votal_app/ui/create_post/create_post_view.dart';
 import 'package:votal_app/ui/feed/feed_view.dart';
 import 'package:votal_app/ui/home/home_view.dart';
 import 'package:votal_app/ui/login/login_view.dart';
@@ -15,11 +17,25 @@ import 'package:votal_app/ui/startup/startup_view.dart';
     AutoRoute(page: LoginView),
     AutoRoute(page: CreateAccountView),
     AutoRoute(
-      guards: [AuthGuard],
-      page: HomeView,
+      page: EmptyRouterPage,
+      path: '/home',
+      name: 'HomeWrapper',
       children: [
-        AutoRoute(page: FeedView, name: 'FeedTab'),
-        AutoRoute(page: ProfileView, name: 'ProfileTab'),
+        AutoRoute(
+          path: '/',
+          guards: [AuthGuard],
+          page: HomeView,
+          children: [
+            AutoRoute(page: FeedView, name: 'FeedTab'),
+            AutoRoute(page: ProfileView, name: 'ProfileTab'),
+          ],
+        ),
+        AutoRoute(
+          path: '/create-post',
+          page: CreatePostView,
+          name: 'CreatePostModal',
+          fullscreenDialog: true,
+        ),
       ],
     ),
   ],

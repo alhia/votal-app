@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget with AutoRouteAware {
         extendBody: true,
         routes: [FeedTab(), ProfileTab()],
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: model.navigateToCreatePost,
           child: Icon(
             Icons.mic,
             size: 24,

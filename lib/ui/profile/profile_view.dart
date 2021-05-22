@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
-import 'package:votal_app/app/app.locator.dart';
+import 'package:votal_app/app/locator.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);

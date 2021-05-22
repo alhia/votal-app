@@ -2,10 +2,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:votal_app/app/app.gr.dart';
 import 'package:votal_app/app/app.locator.dart';
+import 'package:votal_app/app/locator.dart';
 import 'package:votal_app/models/user/user.dart';
 import 'package:votal_app/services/user_service.dart';
-import 'package:votal_app/ui/home/home_view.dart';
-import 'package:votal_app/ui/login/login_view.dart';
 import 'test_helpers.mocks.dart';
 
 @GenerateMocks([], customMocks: [
