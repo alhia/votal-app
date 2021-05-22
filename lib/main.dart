@@ -20,13 +20,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = locator<AppRouter>();
     return MaterialApp.router(
+      
         theme: theme(context),
         routerDelegate: AutoRouterDelegate(
+          
           router,
           navigatorObservers: () => [
             AutoRouteObserver(),
             StackedService.routeObserver,
             MyNavigationObserver(),
+            
           ],
         ),
         routeInformationParser: router.defaultRouteParser());

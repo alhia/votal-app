@@ -7,52 +7,57 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../ui/create_account/create_account_view.dart' as _i5;
-import '../ui/feed/feed_view.dart' as _i7;
-import '../ui/home/home_view.dart' as _i6;
-import '../ui/login/login_view.dart' as _i4;
-import '../ui/profile/profile_view.dart' as _i8;
-import '../ui/startup/startup_view.dart' as _i3;
+import '../ui/create_account/create_account_view.dart' as _i6;
+import '../ui/feed/feed_view.dart' as _i8;
+import '../ui/home/home_view.dart' as _i7;
+import '../ui/login/login_view.dart' as _i5;
+import '../ui/profile/profile_view.dart' as _i9;
+import '../ui/startup/startup_view.dart' as _i4;
+import 'auth_guard.dart' as _i3;
 
 class AppRouter extends _i1.RootStackRouter {
-  AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
+  AppRouter(
+      {_i2.GlobalKey<_i2.NavigatorState>? navigatorKey,
+      required this.authGuard})
       : super(navigatorKey);
+
+  final _i3.AuthGuard authGuard;
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
     StartUpRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i3.StartUpView();
+          return const _i4.StartUpView();
         }),
     LoginRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (data) {
           final args =
               data.argsAs<LoginRouteArgs>(orElse: () => const LoginRouteArgs());
-          return _i4.LoginView(key: args.key);
+          return _i5.LoginView(key: args.key);
         }),
     CreateAccountRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (data) {
           final args = data.argsAs<CreateAccountRouteArgs>(
               orElse: () => const CreateAccountRouteArgs());
-          return _i5.CreateAccountView(key: args.key);
+          return _i6.CreateAccountView(key: args.key);
         }),
     HomeRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i6.HomeView();
+          return const _i7.HomeView();
         }),
-    FeedRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    FeedTab.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i7.FeedView();
+          return _i8.FeedView();
         }),
-    ProfileRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    ProfileTab.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i8.ProfileView();
+          return const _i9.ProfileView();
         })
   };
 
@@ -61,9 +66,12 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(StartUpRoute.name, path: '/'),
         _i1.RouteConfig(LoginRoute.name, path: '/login-view'),
         _i1.RouteConfig(CreateAccountRoute.name, path: '/create-account-view'),
-        _i1.RouteConfig(HomeRoute.name, path: '/home-view', children: [
-          _i1.RouteConfig(FeedRoute.name, path: 'feed-view'),
-          _i1.RouteConfig(ProfileRoute.name, path: 'profile-view')
+        _i1.RouteConfig(HomeRoute.name, path: '/home-view', guards: [
+          authGuard
+        ], children: [
+          _i1.RouteConfig(FeedTab.name, path: 'feed-view', guards: [authGuard]),
+          _i1.RouteConfig(ProfileTab.name,
+              path: 'profile-view', guards: [authGuard])
         ])
       ];
 }
@@ -109,14 +117,14 @@ class HomeRoute extends _i1.PageRouteInfo {
   static const String name = 'HomeRoute';
 }
 
-class FeedRoute extends _i1.PageRouteInfo {
-  const FeedRoute() : super(name, path: 'feed-view');
+class FeedTab extends _i1.PageRouteInfo {
+  const FeedTab() : super(name, path: 'feed-view');
 
-  static const String name = 'FeedRoute';
+  static const String name = 'FeedTab';
 }
 
-class ProfileRoute extends _i1.PageRouteInfo {
-  const ProfileRoute() : super(name, path: 'profile-view');
+class ProfileTab extends _i1.PageRouteInfo {
+  const ProfileTab() : super(name, path: 'profile-view');
 
-  static const String name = 'ProfileRoute';
+  static const String name = 'ProfileTab';
 }

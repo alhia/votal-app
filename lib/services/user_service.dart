@@ -41,4 +41,8 @@ class UserService {
       log.v('_currentUser has been saved');
     }
   }
+
+  void removeUser() async {
+    _currentUser = null;
+  }
 }
