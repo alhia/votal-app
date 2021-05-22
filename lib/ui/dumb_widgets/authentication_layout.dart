@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
+import 'package:votal_app/ui/shared/app_colors.dart';
 import 'package:votal_app/ui/shared/ui_helpers.dart';
 
 class AuthenticationLayout extends StatelessWidget {
@@ -14,7 +13,7 @@ class AuthenticationLayout extends StatelessWidget {
   final void Function()? onCreateAccountTapped;
   final void Function()? onForgotPassword;
   final void Function()? onBackPressed;
-  final void Function()? onSignInWithApple;
+  final void Function()? onSignInWithFacebook;
   final void Function()? onSignInWithGoogle;
   final String? validationMessage;
   final bool busy;
@@ -29,7 +28,7 @@ class AuthenticationLayout extends StatelessWidget {
     this.onCreateAccountTapped,
     this.onForgotPassword,
     this.onBackPressed,
-    this.onSignInWithApple,
+    this.onSignInWithFacebook,
     this.onSignInWithGoogle,
     this.validationMessage,
     this.showTermsText = false,
@@ -38,7 +37,7 @@ class AuthenticationLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: ListView(
@@ -69,29 +68,31 @@ class AuthenticationLayout extends StatelessWidget {
           Center(
             child: Text(
               title!,
-              style: TextStyle(fontSize: 34),
+              style: theme.primaryTextTheme.headline4,
             ),
           ),
           verticalSpaceSmall,
           Center(
             child: SizedBox(
-              width: screenWidthPercentage(context, percentage: 0.7),
+              width: screenWidthPercentage(context, percentage: 0.8),
               child: Text(
                 subtitle!,
+                style: theme.primaryTextTheme.subtitle1,
               ),
             ),
           ),
-          verticalSpaceRegular,
+          verticalSpaceMedium,
           form!,
           verticalSpaceRegular,
           if (onForgotPassword != null)
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                  onTap: onForgotPassword,
-                  child: Text(
-                    'Forget Password?',
-                  )),
+                onTap: onForgotPassword,
+                child: Text(
+                  'Forgot your password?',
+                ),
+              ),
             ),
           verticalSpaceRegular,
           if (validationMessage != null)
@@ -102,28 +103,15 @@ class AuthenticationLayout extends StatelessWidget {
               ),
             ),
           if (validationMessage != null) verticalSpaceRegular,
-          GestureDetector(
-            onTap: onMainButtonTapped,
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: busy
-                  ? CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(Colors.white),
-                    )
-                  : Text(
-                      mainButtonTitle!,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
-                    ),
-            ),
+          TextButton(
+            onPressed: onMainButtonTapped,
+            child: busy
+                ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.white),
+                  )
+                : Text(
+                    mainButtonTitle!,
+                  ),
           ),
           verticalSpaceRegular,
           if (onCreateAccountTapped != null)
@@ -147,24 +135,30 @@ class AuthenticationLayout extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           verticalSpaceRegular,
-          Align(
-              alignment: Alignment.center,
+          Center(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+              decoration:
+                  BoxDecoration(color: theme.primaryColor.withOpacity(0.1)),
               child: Text(
-                'Or',
-              )),
-          verticalSpaceRegular,
-          if (Platform.isIOS)
-            FacebookAuthButton(
-              onPressed: onSignInWithApple ?? () {},
-              // darkMode: true,
-              text: 'CONTINUE WITH FACEBOOK',
-              style: AuthButtonStyle(
-                iconSize: 24,
-                height: 50,
-                textStyle: TextStyle(color: Colors.white),
-                buttonType: AuthButtonType.secondary,
+                'Or continue with',
+                style:
+                    theme.textTheme.caption!.copyWith(color: AppColors.purple),
               ),
             ),
+          ),
+          verticalSpaceRegular,
+          FacebookAuthButton(
+            onPressed: onSignInWithFacebook ?? () {},
+            // darkMode: true,
+            text: 'CONTINUE WITH FACEBOOK',
+            style: AuthButtonStyle(
+              iconSize: 24,
+              height: 50,
+              textStyle: TextStyle(color: Colors.white),
+              buttonType: AuthButtonType.secondary,
+            ),
+          ),
           verticalSpaceRegular,
           GoogleAuthButton(
             onPressed: onSignInWithGoogle ?? () {},

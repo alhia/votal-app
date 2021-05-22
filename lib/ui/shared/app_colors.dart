@@ -35,8 +35,8 @@ class AppColors {
     },
   );
 
-  static const Color background = Color(0xFF121212);
+  static const Color background = Color(0xFF292929);
   static const Color surface = Color(0xFF121212);
   static const Color error = Color(0xFFCF6679);
-  
+  static const Color grey = Color(0xFF979797);
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:votal_app/app/app.router.dart';
+import 'package:votal_app/app/app.gr.dart';
 import 'package:votal_app/ui/startup/startup_viewmodel.dart';
 
 import '../helpers/test_helpers.dart';
@@ -22,11 +22,11 @@ void main() {
       });
       test('When we have no logged in user, should navigate to the login view',
           () async {
-        final navigationService = getAndRegisterNavigationService();
+        final router = getAndRegisterNavigationService();
         final model = _getModel();
         await model.runStartupLogic();
 
-        verify(navigationService.replaceWith(Routes.loginView));
+        verify(router.replace(LoginRoute()));
       });
 
       test(

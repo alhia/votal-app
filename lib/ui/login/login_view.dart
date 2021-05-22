@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:votal_app/ui/dumb_widgets/authentication_layout.dart';
+import 'package:votal_app/ui/shared/ui_helpers.dart';
 
 import 'login_view.form.dart';
 import 'login_viewmodel.dart';
@@ -29,19 +30,20 @@ class LoginView extends StatelessWidget with $LoginView {
         form: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(hintText: 'Email'),
               controller: emailController,
             ),
+            verticalSpaceRegular,
             TextField(
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(hintText: 'Password'),
               controller: passwordController,
-              
+              obscureText: true,
             ),
           ],
         ),
         onForgotPassword: () {},
         onSignInWithGoogle: model.useGoogleAuthentication,
-        onSignInWithApple: model.useFacebookAuthentication,
+        onSignInWithFacebook: model.useFacebookAuthentication,
       )),
       viewModelBuilder: () => LoginViewModel(),
     );

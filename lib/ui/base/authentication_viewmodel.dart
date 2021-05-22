@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:votal_app/app/app.gr.dart';
 import 'package:votal_app/app/app.locator.dart';
 import 'package:votal_app/app/app.logger.dart';
 import 'package:votal_app/exeptions/exeptions.dart';
@@ -12,12 +13,12 @@ abstract class AuthenticationViewModel extends FormViewModel {
   final log = getLogger('AuthenticationViewModel');
 
   final userService = locator<UserService>();
-  final navigationService = locator<NavigationService>();
+  final router = locator<AppRouter>();
 
   final firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
-  final String successRoute;
+  final PageRouteInfo successRoute;
   AuthenticationViewModel({required this.successRoute});
 
   @override
@@ -71,7 +72,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
       );
 
       // navigate to success route
-      navigationService.replaceWith(successRoute);
+      router.replace(successRoute);
     } else {
       if (!authResult.hasError && authResult.user == null) {
         log.wtf(

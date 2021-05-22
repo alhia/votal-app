@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:votal_app/ui/dumb_widgets/authentication_layout.dart';
+import 'package:votal_app/ui/shared/ui_helpers.dart';
 
 import 'create_account_view.form.dart';
 import 'create_account_viewmodel.dart';
@@ -32,15 +33,17 @@ class CreateAccountView extends StatelessWidget with $CreateAccountView {
             form: Column(
               children: [
                 TextField(
-                  decoration: InputDecoration(labelText: 'Full Name'),
+                  decoration: InputDecoration(hintText: 'Full Name'),
                   controller: fullNameController,
                 ),
+                verticalSpaceMedium,
                 TextField(
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: InputDecoration(hintText: 'Email'),
                   controller: emailController,
                 ),
+                verticalSpaceRegular,
                 TextField(
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: InputDecoration(hintText: 'Password'),
                   obscureText: true,
                   controller: passwordController,
                 ),

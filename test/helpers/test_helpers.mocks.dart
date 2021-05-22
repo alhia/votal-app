@@ -2,14 +2,27 @@
 // in votal_app/test/helpers/test_helpers.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i10;
+import 'dart:ui' as _i18;
 
+import 'package:auto_route/src/matcher/route_match.dart' as _i15;
+import 'package:auto_route/src/matcher/route_matcher.dart' as _i4;
+import 'package:auto_route/src/navigation_failure.dart' as _i17;
+import 'package:auto_route/src/route/page_route_info.dart' as _i16;
+import 'package:auto_route/src/route/route_config.dart' as _i13;
+import 'package:auto_route/src/router/auto_route_page.dart' as _i3;
+import 'package:auto_route/src/router/controller/routing_controller.dart'
+    as _i2;
+import 'package:auto_route/src/router/parser/route_information_parser.dart'
+    as _i8;
+import 'package:auto_route/src/router/widgets/auto_router_delegate.dart' as _i7;
+import 'package:flutter/src/foundation/key.dart' as _i5;
 import 'package:flutter/src/widgets/framework.dart' as _i6;
-import 'package:flutter/src/widgets/navigator.dart' as _i7;
+import 'package:flutter/src/widgets/navigator.dart' as _i14;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:stacked_services/src/navigation_service.dart' as _i5;
-import 'package:votal_app/models/user/user.dart' as _i2;
-import 'package:votal_app/services/user_service.dart' as _i3;
+import 'package:votal_app/app/app.gr.dart' as _i12;
+import 'package:votal_app/models/user/user.dart' as _i11;
+import 'package:votal_app/services/user_service.dart' as _i9;
 
 // ignore_for_file: comment_references
 // ignore_for_file: unnecessary_parenthesis
@@ -18,186 +31,356 @@ import 'package:votal_app/services/user_service.dart' as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 
-class _FakeUser extends _i1.Fake implements _i2.User {}
+class _FakeRouteData extends _i1.Fake implements _i2.RouteData {}
+
+class _FakeAutoRoutePage<T> extends _i1.Fake implements _i3.AutoRoutePage<T> {}
+
+class _FakeRouteMatcher extends _i1.Fake implements _i4.RouteMatcher {}
+
+class _FakeRouteCollection extends _i1.Fake implements _i4.RouteCollection {}
+
+class _FakeLocalKey extends _i1.Fake implements _i5.LocalKey {}
+
+class _FakeGlobalKey<T extends _i6.State<_i6.StatefulWidget>> extends _i1.Fake
+    implements _i6.GlobalKey<T> {}
+
+class _FakeRoutingController extends _i1.Fake implements _i2.RoutingController {
+}
+
+class _FakeStackRouter extends _i1.Fake implements _i2.StackRouter {}
+
+class _FakeAutoRouterDelegate extends _i1.Fake
+    implements _i7.AutoRouterDelegate {}
+
+class _FakeDefaultRouteParser extends _i1.Fake
+    implements _i8.DefaultRouteParser {}
 
 /// A class which mocks [UserService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserService extends _i1.Mock implements _i3.UserService {
+class MockUserService extends _i1.Mock implements _i9.UserService {
   @override
   bool get hasLoggedInUser => (super
           .noSuchMethod(Invocation.getter(#hasLoggedInUser), returnValue: false)
       as bool);
   @override
-  _i2.User get currentUser =>
-      (super.noSuchMethod(Invocation.getter(#currentUser),
-          returnValue: _FakeUser()) as _i2.User);
-  @override
-  _i4.Future<void> syncUserAccount() =>
+  _i10.Future<void> syncUserAccount() =>
       (super.noSuchMethod(Invocation.method(#syncUserAccount, []),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
   @override
-  _i4.Future<void> syncOrCreateUserAccount({_i2.User? user}) =>
+  _i10.Future<void> syncOrCreateUserAccount({_i11.User? user}) =>
       (super.noSuchMethod(
           Invocation.method(#syncOrCreateUserAccount, [], {#user: user}),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
 }
 
-/// A class which mocks [NavigationService].
+/// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationService extends _i1.Mock implements _i5.NavigationService {
+class MockAppRouter extends _i1.Mock implements _i12.AppRouter {
   @override
-  String get previousRoute =>
-      (super.noSuchMethod(Invocation.getter(#previousRoute), returnValue: '')
-          as String);
+  Map<String, _i7.PageFactory> get pagesMap =>
+      (super.noSuchMethod(Invocation.getter(#pagesMap),
+              returnValue: <String, _i7.PageFactory>{})
+          as Map<String, _i7.PageFactory>);
   @override
-  String get currentRoute =>
-      (super.noSuchMethod(Invocation.getter(#currentRoute), returnValue: '')
-          as String);
+  List<_i13.RouteConfig> get routes =>
+      (super.noSuchMethod(Invocation.getter(#routes),
+          returnValue: <_i13.RouteConfig>[]) as List<_i13.RouteConfig>);
   @override
-  _i6.GlobalKey<_i7.NavigatorState>? nestedNavigationKey(int? index) =>
-      (super.noSuchMethod(Invocation.method(#nestedNavigationKey, [index]))
-          as _i6.GlobalKey<_i7.NavigatorState>?);
+  _i2.RouteData get routeData =>
+      (super.noSuchMethod(Invocation.getter(#routeData),
+          returnValue: _FakeRouteData()) as _i2.RouteData);
   @override
-  void config(
-          {bool? enableLog,
-          bool? defaultPopGesture,
-          bool? defaultOpaqueRoute,
-          Duration? defaultDurationTransition,
-          bool? defaultGlobalState,
-          String? defaultTransition}) =>
-      super.noSuchMethod(
-          Invocation.method(#config, [], {
-            #enableLog: enableLog,
-            #defaultPopGesture: defaultPopGesture,
-            #defaultOpaqueRoute: defaultOpaqueRoute,
-            #defaultDurationTransition: defaultDurationTransition,
-            #defaultGlobalState: defaultGlobalState,
-            #defaultTransition: defaultTransition
+  bool get managedByWidget => (super
+          .noSuchMethod(Invocation.getter(#managedByWidget), returnValue: false)
+      as bool);
+  @override
+  _i7.PageBuilder get pageBuilder => (super.noSuchMethod(
+          Invocation.getter(#pageBuilder),
+          returnValue: (_i2.RouteData data) => _FakeAutoRoutePage<dynamic>())
+      as _i7.PageBuilder);
+  @override
+  _i4.RouteMatcher get matcher =>
+      (super.noSuchMethod(Invocation.getter(#matcher),
+          returnValue: _FakeRouteMatcher()) as _i4.RouteMatcher);
+  @override
+  _i4.RouteCollection get routeCollection =>
+      (super.noSuchMethod(Invocation.getter(#routeCollection),
+          returnValue: _FakeRouteCollection()) as _i4.RouteCollection);
+  @override
+  _i5.LocalKey get key =>
+      (super.noSuchMethod(Invocation.getter(#key), returnValue: _FakeLocalKey())
+          as _i5.LocalKey);
+  @override
+  _i6.GlobalKey<_i14.NavigatorState> get navigatorKey =>
+      (super.noSuchMethod(Invocation.getter(#navigatorKey),
+              returnValue: _FakeGlobalKey<_i14.NavigatorState>())
+          as _i6.GlobalKey<_i14.NavigatorState>);
+  @override
+  List<_i15.RouteMatch> get currentSegments =>
+      (super.noSuchMethod(Invocation.getter(#currentSegments),
+          returnValue: <_i15.RouteMatch>[]) as List<_i15.RouteMatch>);
+  @override
+  bool get canPopSelfOrChildren =>
+      (super.noSuchMethod(Invocation.getter(#canPopSelfOrChildren),
+          returnValue: false) as bool);
+  @override
+  _i2.RouteData get current => (super.noSuchMethod(Invocation.getter(#current),
+      returnValue: _FakeRouteData()) as _i2.RouteData);
+  @override
+  _i2.RoutingController get topMost =>
+      (super.noSuchMethod(Invocation.getter(#topMost),
+          returnValue: _FakeRoutingController()) as _i2.RoutingController);
+  @override
+  List<_i3.AutoRoutePage<dynamic>> get stack =>
+      (super.noSuchMethod(Invocation.getter(#stack),
+              returnValue: <_i3.AutoRoutePage<dynamic>>[])
+          as List<_i3.AutoRoutePage<dynamic>>);
+  @override
+  bool get hasEntries =>
+      (super.noSuchMethod(Invocation.getter(#hasEntries), returnValue: false)
+          as bool);
+  @override
+  List<_i2.RouteData> get stackData =>
+      (super.noSuchMethod(Invocation.getter(#stackData),
+          returnValue: <_i2.RouteData>[]) as List<_i2.RouteData>);
+  @override
+  int get currentSegmentsHash => (super
+          .noSuchMethod(Invocation.getter(#currentSegmentsHash), returnValue: 0)
+      as int);
+  @override
+  _i2.StackRouter get root => (super.noSuchMethod(Invocation.getter(#root),
+      returnValue: _FakeStackRouter()) as _i2.StackRouter);
+  @override
+  bool get isRoot =>
+      (super.noSuchMethod(Invocation.getter(#isRoot), returnValue: false)
+          as bool);
+  @override
+  _i2.RouteData get topRoute =>
+      (super.noSuchMethod(Invocation.getter(#topRoute),
+          returnValue: _FakeRouteData()) as _i2.RouteData);
+  @override
+  bool get hasListeners =>
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
+  @override
+  _i7.AutoRouterDelegate delegate(
+          {List<_i16.PageRouteInfo<dynamic>>? initialRoutes,
+          String? initialDeepLink,
+          String? navRestorationScopeId,
+          _i6.WidgetBuilder? placeholder,
+          _i7.NavigatorObserversBuilder? navigatorObservers =
+              _i7.AutoRouterDelegate.defaultNavigatorObserversBuilder}) =>
+      (super.noSuchMethod(
+          Invocation.method(#delegate, [], {
+            #initialRoutes: initialRoutes,
+            #initialDeepLink: initialDeepLink,
+            #navRestorationScopeId: navRestorationScopeId,
+            #placeholder: placeholder,
+            #navigatorObservers: navigatorObservers
           }),
-          returnValueForMissingStub: null);
+          returnValue: _FakeAutoRouterDelegate()) as _i7.AutoRouterDelegate);
   @override
-  _i4.Future<dynamic>? navigateWithTransition(_i6.Widget? page,
-          {bool? opaque,
-          String? transition = r'',
-          Duration? duration,
-          bool? popGesture,
-          int? id}) =>
-      (super.noSuchMethod(Invocation.method(#navigateWithTransition, [
-        page
-      ], {
-        #opaque: opaque,
-        #transition: transition,
-        #duration: duration,
-        #popGesture: popGesture,
-        #id: id
-      })) as _i4.Future<dynamic>?);
+  _i8.DefaultRouteParser defaultRouteParser(
+          {bool? includePrefixMatches = false}) =>
+      (super.noSuchMethod(
+          Invocation.method(#defaultRouteParser, [],
+              {#includePrefixMatches: includePrefixMatches}),
+          returnValue: _FakeDefaultRouteParser()) as _i8.DefaultRouteParser);
   @override
-  _i4.Future<dynamic>? replaceWithTransition(_i6.Widget? page,
-          {bool? opaque,
-          String? transition = r'',
-          Duration? duration,
-          bool? popGesture,
-          int? id}) =>
-      (super.noSuchMethod(Invocation.method(#replaceWithTransition, [
-        page
-      ], {
-        #opaque: opaque,
-        #transition: transition,
-        #duration: duration,
-        #popGesture: popGesture,
-        #id: id
-      })) as _i4.Future<dynamic>?);
+  _i10.Future<bool> pop<T extends Object?>([T? result]) =>
+      (super.noSuchMethod(Invocation.method(#pop, [result]),
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
   @override
-  bool back({dynamic result, int? id}) => (super.noSuchMethod(
-      Invocation.method(#back, [], {#result: result, #id: id}),
+  bool removeLast() => (super.noSuchMethod(Invocation.method(#removeLast, []),
       returnValue: false) as bool);
   @override
-  void popUntil(_i7.RoutePredicate? predicate) =>
+  void removeRoute(_i2.RouteData? route, {bool? notify = true}) => super
+      .noSuchMethod(Invocation.method(#removeRoute, [route], {#notify: notify}),
+          returnValueForMissingStub: null);
+  @override
+  _i10.Future<T?> push<T extends Object?>(_i16.PageRouteInfo<dynamic>? route,
+          {_i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#push, [route], {#onFailure: onFailure}),
+          returnValue: Future<T?>.value(null)) as _i10.Future<T?>);
+  @override
+  _i10.Future<T?> replace<T extends Object?>(_i16.PageRouteInfo<dynamic>? route,
+          {_i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#replace, [route], {#onFailure: onFailure}),
+          returnValue: Future<T?>.value(null)) as _i10.Future<T?>);
+  @override
+  _i10.Future<void> pushAll(List<_i16.PageRouteInfo<dynamic>>? routes,
+          {_i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#pushAll, [routes], {#onFailure: onFailure}),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
+  @override
+  _i10.Future<void> popAndPushAll(List<_i16.PageRouteInfo<dynamic>>? routes,
+          {dynamic onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#popAndPushAll, [routes], {#onFailure: onFailure}),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
+  @override
+  _i10.Future<void> replaceAll(List<_i16.PageRouteInfo<dynamic>>? routes,
+          {_i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#replaceAll, [routes], {#onFailure: onFailure}),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
+  @override
+  void popUntilRoot() =>
+      super.noSuchMethod(Invocation.method(#popUntilRoot, []),
+          returnValueForMissingStub: null);
+  @override
+  _i10.Future<T?> popAndPush<T extends Object?, TO extends Object?>(
+          _i16.PageRouteInfo<dynamic>? route,
+          {TO? result,
+          _i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #popAndPush, [route], {#result: result, #onFailure: onFailure}),
+          returnValue: Future<T?>.value(null)) as _i10.Future<T?>);
+  @override
+  bool removeUntil(_i2.RouteDataPredicate? predicate) =>
+      (super.noSuchMethod(Invocation.method(#removeUntil, [predicate]),
+          returnValue: false) as bool);
+  @override
+  void popUntil(_i14.RoutePredicate? predicate) =>
       super.noSuchMethod(Invocation.method(#popUntil, [predicate]),
           returnValueForMissingStub: null);
   @override
-  void popRepeated(int? popTimes) =>
-      super.noSuchMethod(Invocation.method(#popRepeated, [popTimes]),
+  bool removeWhere(_i2.RouteDataPredicate? predicate) =>
+      (super.noSuchMethod(Invocation.method(#removeWhere, [predicate]),
+          returnValue: false) as bool);
+  @override
+  void updateDeclarativeRoutes(List<_i16.PageRouteInfo<dynamic>>? routes) =>
+      super.noSuchMethod(Invocation.method(#updateDeclarativeRoutes, [routes]),
           returnValueForMissingStub: null);
   @override
-  _i4.Future<dynamic>? navigateTo(String? routeName,
-          {dynamic arguments,
-          int? id,
-          bool? preventDuplicates = true,
-          Map<String, String>? parameters}) =>
-      (super.noSuchMethod(Invocation.method(#navigateTo, [
-        routeName
-      ], {
-        #arguments: arguments,
-        #id: id,
-        #preventDuplicates: preventDuplicates,
-        #parameters: parameters
-      })) as _i4.Future<dynamic>?);
+  _i10.Future<void> navigateAll(List<_i15.RouteMatch>? routes,
+          {_i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#navigateAll, [routes], {#onFailure: onFailure}),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
   @override
-  _i4.Future<dynamic>? navigateToView(_i6.Widget? view,
-          {dynamic arguments, int? id, bool? preventDuplicates = true}) =>
-      (super.noSuchMethod(Invocation.method(#navigateToView, [
-        view
-      ], {
-        #arguments: arguments,
-        #id: id,
-        #preventDuplicates: preventDuplicates
-      })) as _i4.Future<dynamic>?);
+  _i10.Future<T?> pushAndPopUntil<T extends Object?>(
+          _i16.PageRouteInfo<dynamic>? route,
+          {_i14.RoutePredicate? predicate,
+          _i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#pushAndPopUntil, [route],
+              {#predicate: predicate, #onFailure: onFailure}),
+          returnValue: Future<T?>.value(null)) as _i10.Future<T?>);
   @override
-  _i4.Future<dynamic>? replaceWith(String? routeName,
-          {dynamic arguments,
-          int? id,
-          bool? preventDuplicates = true,
-          Map<String, String>? parameters}) =>
-      (super.noSuchMethod(Invocation.method(#replaceWith, [
-        routeName
-      ], {
-        #arguments: arguments,
-        #id: id,
-        #preventDuplicates: preventDuplicates,
-        #parameters: parameters
-      })) as _i4.Future<dynamic>?);
+  _i10.Future<T?> replaceNamed<T extends Object?>(String? path,
+          {bool? includePrefixMatches = false,
+          _i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#replaceNamed, [
+            path
+          ], {
+            #includePrefixMatches: includePrefixMatches,
+            #onFailure: onFailure
+          }),
+          returnValue: Future<T?>.value(null)) as _i10.Future<T?>);
   @override
-  _i4.Future<dynamic>? clearStackAndShow(String? routeName,
-          {dynamic arguments, int? id, Map<String, String>? parameters}) =>
-      (super.noSuchMethod(Invocation.method(#clearStackAndShow, [
-        routeName
-      ], {
-        #arguments: arguments,
-        #id: id,
-        #parameters: parameters
-      })) as _i4.Future<dynamic>?);
+  _i10.Future<T?> pushNamed<T extends Object?>(String? path,
+          {bool? includePrefixMatches = false,
+          _i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#pushNamed, [
+            path
+          ], {
+            #includePrefixMatches: includePrefixMatches,
+            #onFailure: onFailure
+          }),
+          returnValue: Future<T?>.value(null)) as _i10.Future<T?>);
   @override
-  _i4.Future<dynamic>? clearTillFirstAndShow(String? routeName,
-          {dynamic arguments,
-          int? id,
-          bool? preventDuplicates = true,
-          Map<String, String>? parameters}) =>
-      (super.noSuchMethod(Invocation.method(#clearTillFirstAndShow, [
-        routeName
-      ], {
-        #arguments: arguments,
-        #id: id,
-        #preventDuplicates: preventDuplicates,
-        #parameters: parameters
-      })) as _i4.Future<dynamic>?);
+  _i10.Future<T?> pushPath<T extends Object?>(String? path,
+          {bool? includePrefixMatches = false,
+          _i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#pushPath, [
+            path
+          ], {
+            #includePrefixMatches: includePrefixMatches,
+            #onFailure: onFailure
+          }),
+          returnValue: Future<T?>.value(null)) as _i10.Future<T?>);
   @override
-  _i4.Future<dynamic>? clearTillFirstAndShowView(_i6.Widget? view,
-          {dynamic arguments, int? id}) =>
-      (super.noSuchMethod(Invocation.method(#clearTillFirstAndShowView, [view],
-          {#arguments: arguments, #id: id})) as _i4.Future<dynamic>?);
+  void popUntilRouteWithName(String? name) =>
+      super.noSuchMethod(Invocation.method(#popUntilRouteWithName, [name]),
+          returnValueForMissingStub: null);
   @override
-  _i4.Future<dynamic>? pushNamedAndRemoveUntil(String? routeName,
-          {_i7.RoutePredicate? predicate, dynamic arguments, int? id}) =>
-      (super.noSuchMethod(Invocation.method(#pushNamedAndRemoveUntil, [
-        routeName
-      ], {
-        #predicate: predicate,
-        #arguments: arguments,
-        #id: id
-      })) as _i4.Future<dynamic>?);
+  void attachChildController(_i2.RoutingController? childController) =>
+      super.noSuchMethod(
+          Invocation.method(#attachChildController, [childController]),
+          returnValueForMissingStub: null);
+  @override
+  void removeChildController(_i2.RoutingController? childController) =>
+      super.noSuchMethod(
+          Invocation.method(#removeChildController, [childController]),
+          returnValueForMissingStub: null);
+  @override
+  bool isRouteActive(String? routeName) =>
+      (super.noSuchMethod(Invocation.method(#isRouteActive, [routeName]),
+          returnValue: false) as bool);
+  @override
+  bool isPathActive(String? path) =>
+      (super.noSuchMethod(Invocation.method(#isPathActive, [path]),
+          returnValue: false) as bool);
+  @override
+  _i10.Future<dynamic> navigate(_i16.PageRouteInfo<dynamic>? route,
+          {_i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#navigate, [route], {#onFailure: onFailure}),
+          returnValue: Future<dynamic>.value(null)) as _i10.Future<dynamic>);
+  @override
+  _i10.Future<void> navigateNamed(String? path,
+          {bool? includePrefixMatches = false,
+          _i17.OnNavigationFailure? onFailure}) =>
+      (super.noSuchMethod(
+          Invocation.method(#navigateNamed, [
+            path
+          ], {
+            #includePrefixMatches: includePrefixMatches,
+            #onFailure: onFailure
+          }),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
+  @override
+  T? innerRouterOf<T extends _i2.RoutingController>(String? routeName) =>
+      (super.noSuchMethod(Invocation.method(#innerRouterOf, [routeName]))
+          as T?);
+  @override
+  _i10.Future<bool> popTop<T extends Object?>([T? result]) =>
+      (super.noSuchMethod(Invocation.method(#popTop, [result]),
+          returnValue: Future<bool>.value(false)) as _i10.Future<bool>);
+  @override
+  String toString() =>
+      (super.noSuchMethod(Invocation.method(#toString, []), returnValue: '')
+          as String);
+  @override
+  void addListener(_i18.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#addListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void removeListener(_i18.VoidCallback? listener) =>
+      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
+          returnValueForMissingStub: null);
+  @override
+  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValueForMissingStub: null);
+  @override
+  void notifyListeners() =>
+      super.noSuchMethod(Invocation.method(#notifyListeners, []),
+          returnValueForMissingStub: null);
 }
