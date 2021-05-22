@@ -14,21 +14,23 @@ class HomeView extends StatelessWidget with AutoRouteAware {
       onModelReady: (model) =>
           SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {}),
       builder: (context, model, child) => AutoTabsScaffold(
-        
         appBarBuilder: (_, tabsRouter) => AppBar(
           title: Text(context.topRoute.name),
         ),
         extendBody: true,
+        routes: [FeedTab(), ProfileTab()],
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: Icon(Icons.mic),
+          child: Icon(
+            Icons.mic,
+            size: 24,
+          ),
         ),
-        routes: [FeedTab(), ProfileTab()],
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBuilder:
             (BuildContext context, TabsRouter tabsRouter) => BottomAppBar(
           shape: CircularNotchedRectangle(),
-          notchMargin: 6,
+          notchMargin: 10,
           clipBehavior: Clip.hardEdge,
           child: BottomNavigationBar(
             currentIndex: tabsRouter.activeIndex,

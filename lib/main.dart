@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
             AutoRouteObserver(),
             StackedService.routeObserver,
             MyNavigationObserver(),
-            
           ],
+          
         ),
         routeInformationParser: router.defaultRouteParser());
   }

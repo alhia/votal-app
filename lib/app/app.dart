@@ -15,12 +15,11 @@ import 'package:votal_app/ui/startup/startup_view.dart';
     AutoRoute(page: LoginView),
     AutoRoute(page: CreateAccountView),
     AutoRoute(
-      
       guards: [AuthGuard],
       page: HomeView,
       children: [
-        AutoRoute(page: FeedView, name: 'FeedTab',guards: [AuthGuard],),
-        AutoRoute(page: ProfileView, name: 'ProfileTab',guards: [AuthGuard],),
+        AutoRoute(page: FeedView, name: 'FeedTab'),
+        AutoRoute(page: ProfileView, name: 'ProfileTab'),
       ],
     ),
   ],

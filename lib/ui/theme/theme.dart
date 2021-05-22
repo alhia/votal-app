@@ -4,7 +4,11 @@ import 'package:votal_app/ui/shared/app_colors.dart';
 ThemeData theme(context) => ThemeData(
       scaffoldBackgroundColor: AppColors.background,
       primaryColor: AppColors.purple,
+      appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.surface, foregroundColor: Colors.white),
       bottomAppBarColor: AppColors.surface,
+      floatingActionButtonTheme:
+          FloatingActionButtonThemeData(backgroundColor: AppColors.purple),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.surface,
           selectedItemColor: AppColors.purple,

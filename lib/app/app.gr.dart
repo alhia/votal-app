@@ -69,9 +69,8 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(HomeRoute.name, path: '/home-view', guards: [
           authGuard
         ], children: [
-          _i1.RouteConfig(FeedTab.name, path: 'feed-view', guards: [authGuard]),
-          _i1.RouteConfig(ProfileTab.name,
-              path: 'profile-view', guards: [authGuard])
+          _i1.RouteConfig(FeedTab.name, path: 'feed-view'),
+          _i1.RouteConfig(ProfileTab.name, path: 'profile-view')
         ])
       ];
 }
