@@ -1,26 +1,25 @@
-import 'dart:io';
-
 import 'package:photo_manager/photo_manager.dart';
 
 class FileService {
-  Future<List<File>?> getLocalFiles() async {
-    final List<File> assetEntities = [];
+  Future<List<AssetEntity>?> getLocalFiles() async {
+    final List<AssetEntity> files = [];
 
     var result = await PhotoManager.requestPermissionExtend();
     if (result.isAuth) {
       final assetPaths = await PhotoManager.getAssetPathList();
-      for (var assetPath in assetPaths) {
-        final assetList = await assetPath.getAssetListRange(start: 0, end: 1);
+      final videosFolder =
+          assetPaths.singleWhere((path) => path.name == 'Videos');
 
-        for (var asset in assetList) {
-          File? file = await asset.file;
-          if (asset.type == AssetType.video &&
-              await asset.exists &&
-              file != null) assetEntities.add(file);
+      final videosPaged = await videosFolder.getAssetListPaged(0, 10);
+      files.addAll(videosPaged);
+
+      /* for (var video in videosPaged) {
+        final file = await video.file;
+        if (file != null) {
+          files.add(file);
         }
-      }
-      
-    } 
-    return assetEntities;
+      } */
+    }
+    return files;
   }
 }
