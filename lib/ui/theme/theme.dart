@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:votal_app/ui/shared/app_colors.dart';
 
 ThemeData theme(context) => ThemeData(
       scaffoldBackgroundColor: AppColors.background,
       primaryColor: AppColors.purple,
       appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.surface, foregroundColor: Colors.white),
+          backgroundColor: AppColors.surface,
+          foregroundColor: Colors.white,
+          centerTitle: true,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarBrightness: Brightness.dark)),
       bottomAppBarColor: AppColors.surface,
       floatingActionButtonTheme:
           FloatingActionButtonThemeData(backgroundColor: AppColors.purple),

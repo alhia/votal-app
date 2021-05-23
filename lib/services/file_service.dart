@@ -10,7 +10,7 @@ class FileService {
       final videosFolder =
           assetPaths.singleWhere((path) => path.name == 'Videos');
 
-      final videosPaged = await videosFolder.getAssetListPaged(0, 10);
+      final videosPaged = await videosFolder.getAssetListPaged(0, 100);
       files.addAll(videosPaged);
 
       /* for (var video in videosPaged) {
