@@ -1,13 +1,18 @@
+import 'dart:io';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:votal_app/app/app.gr.dart';
 import 'package:votal_app/app/locator.dart';
 import 'package:votal_app/models/user/user.dart';
+import 'package:votal_app/services/file_service.dart';
 import 'package:votal_app/services/user_service.dart';
 import 'test_helpers.mocks.dart';
 
 @GenerateMocks([], customMocks: [
   MockSpec<UserService>(returnNullOnMissingStub: true),
+  MockSpec<FileService>(returnNullOnMissingStub: true),
   MockSpec<AppRouter>(returnNullOnMissingStub: true),
 ])
 UserService getAndRegisterUserService({
@@ -25,22 +30,33 @@ UserService getAndRegisterUserService({
 AppRouter getAndRegisterNavigationService() {
   _removeRegistrationIfExists<AppRouter>();
   final service = MockAppRouter();
-  when(service.push(HomeRoute())).thenAnswer((_) => Future.value(HomeRoute()));
+  when(service.push(HomeWrapper()))
+      .thenAnswer((_) => Future.value(HomeWrapper()));
   when(service.replace(LoginRoute()))
       .thenAnswer((_) => Future.value(LoginRoute()));
-
   locator.registerSingleton<AppRouter>(service);
+  return service;
+}
+
+FileService getAndRegisterFileService() {
+  _removeRegistrationIfExists<FileService>();
+  final service = MockFileService();
+  when(service.getLocalFiles())
+      .thenAnswer((_) => Future.value(List.filled(10, File(''))));
+  locator.registerSingleton<FileService>(service);
   return service;
 }
 
 void registerServices() {
   getAndRegisterUserService();
   getAndRegisterNavigationService();
+  getAndRegisterFileService();
 }
 
 void unregisterServices() {
   locator.unregister<UserService>();
   locator.unregister<AppRouter>();
+  locator.unregister<FileService>();
 }
 
 void _removeRegistrationIfExists<T extends Object>() {

@@ -3,13 +3,14 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i11;
-import 'dart:ui' as _i19;
+import 'dart:io' as _i14;
+import 'dart:ui' as _i21;
 
-import 'package:auto_route/src/matcher/route_match.dart' as _i16;
+import 'package:auto_route/src/matcher/route_match.dart' as _i18;
 import 'package:auto_route/src/matcher/route_matcher.dart' as _i5;
-import 'package:auto_route/src/navigation_failure.dart' as _i18;
-import 'package:auto_route/src/route/page_route_info.dart' as _i17;
-import 'package:auto_route/src/route/route_config.dart' as _i14;
+import 'package:auto_route/src/navigation_failure.dart' as _i20;
+import 'package:auto_route/src/route/page_route_info.dart' as _i19;
+import 'package:auto_route/src/route/route_config.dart' as _i16;
 import 'package:auto_route/src/router/auto_route_page.dart' as _i4;
 import 'package:auto_route/src/router/controller/routing_controller.dart'
     as _i3;
@@ -18,11 +19,12 @@ import 'package:auto_route/src/router/parser/route_information_parser.dart'
 import 'package:auto_route/src/router/widgets/auto_router_delegate.dart' as _i8;
 import 'package:flutter/src/foundation/key.dart' as _i6;
 import 'package:flutter/src/widgets/framework.dart' as _i7;
-import 'package:flutter/src/widgets/navigator.dart' as _i15;
+import 'package:flutter/src/widgets/navigator.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:votal_app/app/app.gr.dart' as _i13;
+import 'package:votal_app/app/app.gr.dart' as _i15;
 import 'package:votal_app/app/auth_guard.dart' as _i2;
 import 'package:votal_app/models/user/user.dart' as _i12;
+import 'package:votal_app/services/file_service.dart' as _i13;
 import 'package:votal_app/services/user_service.dart' as _i10;
 
 // ignore_for_file: comment_references
@@ -82,10 +84,21 @@ class MockUserService extends _i1.Mock implements _i10.UserService {
       returnValueForMissingStub: null);
 }
 
+/// A class which mocks [FileService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFileService extends _i1.Mock implements _i13.FileService {
+  @override
+  _i11.Future<List<_i14.File>?> getLocalFiles() =>
+      (super.noSuchMethod(Invocation.method(#getLocalFiles, []),
+              returnValue: Future<List<_i14.File>?>.value(<_i14.File>[]))
+          as _i11.Future<List<_i14.File>?>);
+}
+
 /// A class which mocks [AppRouter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
+class MockAppRouter extends _i1.Mock implements _i15.AppRouter {
   @override
   _i2.AuthGuard get authGuard =>
       (super.noSuchMethod(Invocation.getter(#authGuard),
@@ -96,9 +109,9 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
               returnValue: <String, _i8.PageFactory>{})
           as Map<String, _i8.PageFactory>);
   @override
-  List<_i14.RouteConfig> get routes =>
+  List<_i16.RouteConfig> get routes =>
       (super.noSuchMethod(Invocation.getter(#routes),
-          returnValue: <_i14.RouteConfig>[]) as List<_i14.RouteConfig>);
+          returnValue: <_i16.RouteConfig>[]) as List<_i16.RouteConfig>);
   @override
   _i3.RouteData get routeData =>
       (super.noSuchMethod(Invocation.getter(#routeData),
@@ -125,14 +138,14 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
       (super.noSuchMethod(Invocation.getter(#key), returnValue: _FakeLocalKey())
           as _i6.LocalKey);
   @override
-  _i7.GlobalKey<_i15.NavigatorState> get navigatorKey =>
+  _i7.GlobalKey<_i17.NavigatorState> get navigatorKey =>
       (super.noSuchMethod(Invocation.getter(#navigatorKey),
-              returnValue: _FakeGlobalKey<_i15.NavigatorState>())
-          as _i7.GlobalKey<_i15.NavigatorState>);
+              returnValue: _FakeGlobalKey<_i17.NavigatorState>())
+          as _i7.GlobalKey<_i17.NavigatorState>);
   @override
-  List<_i16.RouteMatch> get currentSegments =>
+  List<_i18.RouteMatch> get currentSegments =>
       (super.noSuchMethod(Invocation.getter(#currentSegments),
-          returnValue: <_i16.RouteMatch>[]) as List<_i16.RouteMatch>);
+          returnValue: <_i18.RouteMatch>[]) as List<_i18.RouteMatch>);
   @override
   bool get canPopSelfOrChildren =>
       (super.noSuchMethod(Invocation.getter(#canPopSelfOrChildren),
@@ -178,7 +191,7 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
           as bool);
   @override
   _i8.AutoRouterDelegate delegate(
-          {List<_i17.PageRouteInfo<dynamic>>? initialRoutes,
+          {List<_i19.PageRouteInfo<dynamic>>? initialRoutes,
           String? initialDeepLink,
           String? navRestorationScopeId,
           _i7.WidgetBuilder? placeholder,
@@ -212,34 +225,34 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
       .noSuchMethod(Invocation.method(#removeRoute, [route], {#notify: notify}),
           returnValueForMissingStub: null);
   @override
-  _i11.Future<T?> push<T extends Object?>(_i17.PageRouteInfo<dynamic>? route,
-          {_i18.OnNavigationFailure? onFailure}) =>
+  _i11.Future<T?> push<T extends Object?>(_i19.PageRouteInfo<dynamic>? route,
+          {_i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#push, [route], {#onFailure: onFailure}),
           returnValue: Future<T?>.value(null)) as _i11.Future<T?>);
   @override
-  _i11.Future<T?> replace<T extends Object?>(_i17.PageRouteInfo<dynamic>? route,
-          {_i18.OnNavigationFailure? onFailure}) =>
+  _i11.Future<T?> replace<T extends Object?>(_i19.PageRouteInfo<dynamic>? route,
+          {_i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#replace, [route], {#onFailure: onFailure}),
           returnValue: Future<T?>.value(null)) as _i11.Future<T?>);
   @override
-  _i11.Future<void> pushAll(List<_i17.PageRouteInfo<dynamic>>? routes,
-          {_i18.OnNavigationFailure? onFailure}) =>
+  _i11.Future<void> pushAll(List<_i19.PageRouteInfo<dynamic>>? routes,
+          {_i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#pushAll, [routes], {#onFailure: onFailure}),
           returnValue: Future<void>.value(null),
           returnValueForMissingStub: Future.value()) as _i11.Future<void>);
   @override
-  _i11.Future<void> popAndPushAll(List<_i17.PageRouteInfo<dynamic>>? routes,
+  _i11.Future<void> popAndPushAll(List<_i19.PageRouteInfo<dynamic>>? routes,
           {dynamic onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#popAndPushAll, [routes], {#onFailure: onFailure}),
           returnValue: Future<void>.value(null),
           returnValueForMissingStub: Future.value()) as _i11.Future<void>);
   @override
-  _i11.Future<void> replaceAll(List<_i17.PageRouteInfo<dynamic>>? routes,
-          {_i18.OnNavigationFailure? onFailure}) =>
+  _i11.Future<void> replaceAll(List<_i19.PageRouteInfo<dynamic>>? routes,
+          {_i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#replaceAll, [routes], {#onFailure: onFailure}),
           returnValue: Future<void>.value(null),
@@ -250,9 +263,9 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
           returnValueForMissingStub: null);
   @override
   _i11.Future<T?> popAndPush<T extends Object?, TO extends Object?>(
-          _i17.PageRouteInfo<dynamic>? route,
+          _i19.PageRouteInfo<dynamic>? route,
           {TO? result,
-          _i18.OnNavigationFailure? onFailure}) =>
+          _i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(
               #popAndPush, [route], {#result: result, #onFailure: onFailure}),
@@ -262,7 +275,7 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
       (super.noSuchMethod(Invocation.method(#removeUntil, [predicate]),
           returnValue: false) as bool);
   @override
-  void popUntil(_i15.RoutePredicate? predicate) =>
+  void popUntil(_i17.RoutePredicate? predicate) =>
       super.noSuchMethod(Invocation.method(#popUntil, [predicate]),
           returnValueForMissingStub: null);
   @override
@@ -270,21 +283,21 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
       (super.noSuchMethod(Invocation.method(#removeWhere, [predicate]),
           returnValue: false) as bool);
   @override
-  void updateDeclarativeRoutes(List<_i17.PageRouteInfo<dynamic>>? routes) =>
+  void updateDeclarativeRoutes(List<_i19.PageRouteInfo<dynamic>>? routes) =>
       super.noSuchMethod(Invocation.method(#updateDeclarativeRoutes, [routes]),
           returnValueForMissingStub: null);
   @override
-  _i11.Future<void> navigateAll(List<_i16.RouteMatch>? routes,
-          {_i18.OnNavigationFailure? onFailure}) =>
+  _i11.Future<void> navigateAll(List<_i18.RouteMatch>? routes,
+          {_i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#navigateAll, [routes], {#onFailure: onFailure}),
           returnValue: Future<void>.value(null),
           returnValueForMissingStub: Future.value()) as _i11.Future<void>);
   @override
   _i11.Future<T?> pushAndPopUntil<T extends Object?>(
-          _i17.PageRouteInfo<dynamic>? route,
-          {_i15.RoutePredicate? predicate,
-          _i18.OnNavigationFailure? onFailure}) =>
+          _i19.PageRouteInfo<dynamic>? route,
+          {_i17.RoutePredicate? predicate,
+          _i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#pushAndPopUntil, [route],
               {#predicate: predicate, #onFailure: onFailure}),
@@ -292,7 +305,7 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
   @override
   _i11.Future<T?> replaceNamed<T extends Object?>(String? path,
           {bool? includePrefixMatches = false,
-          _i18.OnNavigationFailure? onFailure}) =>
+          _i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#replaceNamed, [
             path
@@ -304,7 +317,7 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
   @override
   _i11.Future<T?> pushNamed<T extends Object?>(String? path,
           {bool? includePrefixMatches = false,
-          _i18.OnNavigationFailure? onFailure}) =>
+          _i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#pushNamed, [
             path
@@ -316,7 +329,7 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
   @override
   _i11.Future<T?> pushPath<T extends Object?>(String? path,
           {bool? includePrefixMatches = false,
-          _i18.OnNavigationFailure? onFailure}) =>
+          _i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#pushPath, [
             path
@@ -348,15 +361,15 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
       (super.noSuchMethod(Invocation.method(#isPathActive, [path]),
           returnValue: false) as bool);
   @override
-  _i11.Future<dynamic> navigate(_i17.PageRouteInfo<dynamic>? route,
-          {_i18.OnNavigationFailure? onFailure}) =>
+  _i11.Future<dynamic> navigate(_i19.PageRouteInfo<dynamic>? route,
+          {_i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#navigate, [route], {#onFailure: onFailure}),
           returnValue: Future<dynamic>.value(null)) as _i11.Future<dynamic>);
   @override
   _i11.Future<void> navigateNamed(String? path,
           {bool? includePrefixMatches = false,
-          _i18.OnNavigationFailure? onFailure}) =>
+          _i20.OnNavigationFailure? onFailure}) =>
       (super.noSuchMethod(
           Invocation.method(#navigateNamed, [
             path
@@ -379,11 +392,11 @@ class MockAppRouter extends _i1.Mock implements _i13.AppRouter {
       (super.noSuchMethod(Invocation.method(#toString, []), returnValue: '')
           as String);
   @override
-  void addListener(_i19.VoidCallback? listener) =>
+  void addListener(_i21.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i19.VoidCallback? listener) =>
+  void removeListener(_i21.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
   @override

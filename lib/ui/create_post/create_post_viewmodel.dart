@@ -8,6 +8,7 @@ class CreatePostViewModel extends BaseViewModel {
   final _fileService = locator<FileService>();
   List<File> _files = [];
   List<File> get files => _files;
+
   void _getFiles() async {
     _files = await _fileService.getLocalFiles() ?? [];
     notifyListeners();

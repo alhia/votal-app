@@ -78,14 +78,14 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(StartUpRoute.name, path: '/'),
         _i1.RouteConfig(LoginRoute.name, path: '/login-view'),
         _i1.RouteConfig(CreateAccountRoute.name, path: '/create-account-view'),
-        _i1.RouteConfig(HomeWrapper.name, path: 'home', children: [
+        _i1.RouteConfig(HomeWrapper.name, path: '/home', children: [
           _i1.RouteConfig(HomeRoute.name, path: '', guards: [
             authGuard
           ], children: [
             _i1.RouteConfig(FeedTab.name, path: 'feed-view'),
             _i1.RouteConfig(ProfileTab.name, path: 'profile-view')
           ]),
-          _i1.RouteConfig(CreatePostModal.name, path: 'create-post-view')
+          _i1.RouteConfig(CreatePostModal.name, path: 'create-post')
         ])
       ];
 }
@@ -126,7 +126,7 @@ class CreateAccountRouteArgs {
 
 class HomeWrapper extends _i1.PageRouteInfo {
   const HomeWrapper({List<_i1.PageRouteInfo>? children})
-      : super(name, path: 'home', initialChildren: children);
+      : super(name, path: '/home', initialChildren: children);
 
   static const String name = 'HomeWrapper';
 }
@@ -139,7 +139,7 @@ class HomeRoute extends _i1.PageRouteInfo {
 }
 
 class CreatePostModal extends _i1.PageRouteInfo {
-  const CreatePostModal() : super(name, path: 'create-post-view');
+  const CreatePostModal() : super(name, path: 'create-post');
 
   static const String name = 'CreatePostModal';
 }

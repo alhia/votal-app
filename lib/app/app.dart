@@ -22,7 +22,7 @@ import 'package:votal_app/ui/startup/startup_view.dart';
       name: 'HomeWrapper',
       children: [
         AutoRoute(
-          path: '/',
+          path: '',
           guards: [AuthGuard],
           page: HomeView,
           children: [
@@ -31,7 +31,7 @@ import 'package:votal_app/ui/startup/startup_view.dart';
           ],
         ),
         AutoRoute(
-          path: '/create-post',
+          path: 'create-post',
           page: CreatePostView,
           name: 'CreatePostModal',
           fullscreenDialog: true,

@@ -19,7 +19,8 @@ class FileService {
               file != null) assetEntities.add(file);
         }
       }
-      return assetEntities;
-    } else {}
+      
+    } 
+    return assetEntities;
   }
 }
