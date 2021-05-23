@@ -42,6 +42,7 @@ dependencies:
   stacked_services: null
   file_picker: ^3.0.1
   photo_manager: ^1.2.0
+  video_player: ^2.1.1
 
 dev_dependencies:
   flutter_test:
