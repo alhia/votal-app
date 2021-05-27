@@ -10,7 +10,7 @@ class StartupViewModel extends BaseViewModel {
   final router = locator<AppRouter>();
   Future<void> runStartupLogic() async {
     if (_userService.hasLoggedInUser) {
-      log.v('We have a user session on disk. Sync the user profile ...');
+      log.i('We have a user session on disk. Sync the user profile ...');
       await _userService.syncUserAccount();
 
       final currentUser = _userService.currentUser ?? null;

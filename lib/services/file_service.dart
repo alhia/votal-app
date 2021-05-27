@@ -1,6 +1,8 @@
 import 'package:photo_manager/photo_manager.dart';
+import 'package:votal_app/app/app.logger.dart';
 
 class FileService {
+  final _log = getLogger('FileService');
   Future<List<AssetEntity>?> getLocalFiles() async {
     final List<AssetEntity> files = [];
 
@@ -12,14 +14,8 @@ class FileService {
 
       final videosPaged = await videosFolder.getAssetListPaged(0, 100);
       files.addAll(videosPaged);
-
-      /* for (var video in videosPaged) {
-        final file = await video.file;
-        if (file != null) {
-          files.add(file);
-        }
-      } */
     }
+    _log.v('Returning ${files.length} files');
     return files;
   }
 }

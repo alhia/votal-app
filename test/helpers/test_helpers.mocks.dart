@@ -3,7 +3,6 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i11;
-import 'dart:io' as _i14;
 import 'dart:ui' as _i21;
 
 import 'package:auto_route/src/matcher/route_match.dart' as _i18;
@@ -21,6 +20,7 @@ import 'package:flutter/src/foundation/key.dart' as _i6;
 import 'package:flutter/src/widgets/framework.dart' as _i7;
 import 'package:flutter/src/widgets/navigator.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:photo_manager/photo_manager.dart' as _i14;
 import 'package:votal_app/app/app.gr.dart' as _i15;
 import 'package:votal_app/app/auth_guard.dart' as _i2;
 import 'package:votal_app/models/user/user.dart' as _i12;
@@ -89,10 +89,11 @@ class MockUserService extends _i1.Mock implements _i10.UserService {
 /// See the documentation for Mockito's code generation for more information.
 class MockFileService extends _i1.Mock implements _i13.FileService {
   @override
-  _i11.Future<List<_i14.File>?> getLocalFiles() =>
+  _i11.Future<List<_i14.AssetEntity>?> getLocalFiles() =>
       (super.noSuchMethod(Invocation.method(#getLocalFiles, []),
-              returnValue: Future<List<_i14.File>?>.value(<_i14.File>[]))
-          as _i11.Future<List<_i14.File>?>);
+              returnValue:
+                  Future<List<_i14.AssetEntity>?>.value(<_i14.AssetEntity>[]))
+          as _i11.Future<List<_i14.AssetEntity>?>);
 }
 
 /// A class which mocks [AppRouter].

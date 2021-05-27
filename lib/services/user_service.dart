@@ -19,9 +19,9 @@ class UserService {
   Future<void> syncUserAccount() async {
     final firebaseUserId =
         _firebaseAuthenticationService.firebaseAuth.currentUser!.uid;
-    log.v('Sync user $firebaseUserId');
+    log.i('Sync user $firebaseUserId');
 
-    final userAccount = await _firestoreApi.getUser(userId: firebaseUserId);
+    final userAccount = await _firestoreApi.user.get(userId: firebaseUserId);
 
     if (userAccount != null) {
       log.v('User account exists. Save as _currentUser');
@@ -36,7 +36,7 @@ class UserService {
 
     if (_currentUser == null) {
       log.v('We have no user account. Create a new user ...');
-      await _firestoreApi.createUser(user: user);
+      await _firestoreApi.user.create(user: user);
       _currentUser = user;
       log.v('_currentUser has been saved');
     }

@@ -1,8 +1,7 @@
-import 'dart:io';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:votal_app/app/app.gr.dart';
 import 'package:votal_app/app/locator.dart';
 import 'package:votal_app/models/user/user.dart';
@@ -41,8 +40,8 @@ AppRouter getAndRegisterNavigationService() {
 FileService getAndRegisterFileService() {
   _removeRegistrationIfExists<FileService>();
   final service = MockFileService();
-  when(service.getLocalFiles())
-      .thenAnswer((_) => Future.value(List.filled(10, File(''))));
+  when(service.getLocalFiles()).thenAnswer((_) => Future.value(
+      List.filled(10, AssetEntity(height: 3, id: '', typeInt: 1, width: 3))));
   locator.registerSingleton<FileService>(service);
   return service;
 }

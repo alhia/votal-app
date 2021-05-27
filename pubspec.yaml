@@ -23,12 +23,15 @@ dependencies:
     sdk: flutter
   auth_buttons: ^1.0.0
   auto_route: ^2.2.0
+  better_player: ^0.0.68
   cloud_firestore: ^2.1.0
   cupertino_icons: ^1.0.2
   file: ^6.1.1
+  file_picker: ^3.0.1
   file_utils: ^1.0.0
   firebase_auth: ^1.1.4
   firebase_core: ^1.1.1
+  firebase_storage: ^8.1.0
   flutter_dotenv: ^4.0.0-nullsafety.1
   freezed: ^0.14.2
   freezed_annotation: ^0.14.1
@@ -37,12 +40,11 @@ dependencies:
   logger: null
   path: ^1.8.0
   path_provider: ^2.0.1
+  photo_manager: ^1.2.0
   stacked: null
   stacked_firebase_auth: ^0.2.5
   stacked_services: null
-  file_picker: ^3.0.1
-  photo_manager: ^1.2.0
-  better_player: ^0.0.68
+  tcard: ^1.3.5
 
 dev_dependencies:
   flutter_test:
